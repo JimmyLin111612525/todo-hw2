@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Testing</title>
+    </head>
+    <body>
+        <div id='container'>
+                <div id="tester-container">
+                    <div id="info">
+                        <h1>CURRENT jTPS:</h1>
+                        <div id="tps_info">
+                        </div>
+                    </div>
+                    <div id="buttons">
+                        <h3>ENTER A SELECTION</h3>
+                        <span>1) Add a transaction</span> <button id="add">Add</button>
+                        <br><br>
+                        <span>2) Undo a transaction</span> <button id="undo">Undo</button>
+                        <br><br>
+                        <span>3) Redo a transaction</span> <button id="redo">Redo</button>
+                        <br><br>
+                        <span>4) Clear all transactions</span> <button id="clear">Clear</button>
+                        <br><br>
+                        <span>5) Reset num and transactions</span> <button id="reset">Reset</button>
+                        <br><br>
+                        <button id='quit'>Quit</button>
+                    </div>
+                </div>
+            
+                <div id="unit-test-container">
+                    <h1>UNIT TESTING:</h1>
+            
+                </div>
+        </div>
+        <script type="module" src="tester.js"></script>
+        <script type="module" src="unitTest.js"></script>
+    </body>
+    
+
+</html>
