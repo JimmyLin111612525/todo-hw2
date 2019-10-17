@@ -12,7 +12,7 @@ export class actual_Transaction extends jsTPS_Transaction{
         }
         if(transaction.upBtn){
             var prev=transaction.newKey;
-            var cur=transaction.oldKey;
+            const cur=transaction.oldKey;
             const temp = transaction.currentList.items[prev];
             transaction.currentList.items[prev] = transaction.currentList.items[cur];
             transaction.currentList.items[cur] = temp;
@@ -25,7 +25,7 @@ export class actual_Transaction extends jsTPS_Transaction{
         }
         if(transaction.downBtn){
             var next=transaction.newKey;
-            var cur=transaction.oldKey;
+            const cur=transaction.oldKey;
             const temp=transaction.currentList.items[next];
             transaction.currentList.items[next]=transaction.currentList.items[cur];
             transaction.currentList.items[cur]=temp;
@@ -74,7 +74,7 @@ export class actual_Transaction extends jsTPS_Transaction{
         }
         if(transaction.upBtn){
             var prev=transaction.newKey;
-            var cur=transaction.oldKey;
+            const cur=transaction.oldKey;
             const temp = transaction.currentList.items[prev];
             transaction.currentList.items[prev] = transaction.currentList.items[cur];
             transaction.currentList.items[cur] = temp;
@@ -87,7 +87,7 @@ export class actual_Transaction extends jsTPS_Transaction{
         }
         if(transaction.downBtn){
             var next=transaction.newKey;
-            var cur=transaction.oldKey;
+            const cur=transaction.oldKey;
             const temp=transaction.currentList.items[next];
             transaction.currentList.items[next]=transaction.currentList.items[cur];
             transaction.currentList.items[cur]=temp;

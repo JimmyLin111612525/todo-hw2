@@ -131,7 +131,7 @@ export class ListScreen extends Component {
         }
         
     }*/
-    hangOn=(e)=>{
+    /*hangOn=(e)=>{
         if(e.keyCode===90 || e.keyCode===89){
         var res=this.props.undo_redo(e);
         console.log(res);
@@ -144,7 +144,7 @@ export class ListScreen extends Component {
                 //this.props.loadList(this.props.todoList);
             }
         }
-    }
+    }*/
 
 
     render() {
@@ -158,7 +158,7 @@ export class ListScreen extends Component {
         return (
             <div id="todo_list">
                 <ListHeading goHome={this.props.goHome} />
-                <ListTrash deleteList={this.props.deleteList}/>
+                <ListTrash deleteList={this.props.deleteList} undo_redo={this.props.undo_redo}/>
                 <div id="list_details_container">
                     <div id="list_details_name_container" className="text_toolbar" >
                         <span id="list_name_prompt">Name:</span>

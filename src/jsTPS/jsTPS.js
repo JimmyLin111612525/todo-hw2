@@ -35,8 +35,10 @@ export default class jsTPS{
         if(this.hasTransactionToRedo()){
             this.performingDo=true;
             var transaction=this.transactions[this.mostRecentTransaction+1];
+            console.log(transaction);
             lst=this.actTrans.doTransaction(transaction);
-            this.mostRecentTransaction++;
+            if(lst!==null){
+            this.mostRecentTransaction++;}
             this.performingDo=false
         }
         return lst;
@@ -65,6 +67,8 @@ export default class jsTPS{
         if(this.hasTransactionToUndo()){
             this.performingUndo=true;
             var transaction=this.transactions[this.mostRecentTransaction];
+            console.log(this.transactions);
+            console.log(transaction);
             lst=this.actTrans.undoTransaction(transaction);
             this.mostRecentTransaction--;
             this.performingUndo=false;

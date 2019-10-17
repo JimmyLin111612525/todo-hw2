@@ -80,37 +80,54 @@ class App extends Component {
   }
 
   undo_redo=(e)=>{
+    let tPs=this.state.tps;
     if(e.keyCode===90){
-        if(this.state.tps.peekUndo()!==null){
-            var lst= this.state.tps.undoTransaction();
-            if(lst!==null ){
+        if(tPs.peekUndo()!==null){
+            var lst= tPs.undoTransaction();
+            //if(lst!==null ){
                 console.log('undo caught!');
                 this.setState({name:lst.name});
-                this.state.currentList.name=lst.name;
                 this.setState({owner:lst.owner});
+                var newLst=this.state.currentList;
+                newLst.name=lst.name;
+                newLst.owner=lst.owner;
+                newLst.items=lst.items;
+                this.setState({currentList:newLst});
+
+                /*this.state.currentList.name=lst.name;
+                
                 this.state.currentList.owner=lst.owner;
-                this.state.currentList.items=lst.items;
+                this.state.currentList.items=lst.items;*/
                 //this.props.todoList=lst;
+                this.setState({tps:tPs});
                 this.goToList();
                 //console.log(this.props.tps);
-                return this.state.currentList;
-            }
+                //return this.state.currentList;
+            //}
         }
     }else if(e.keyCode===89){
-        if(this.state.tps.peekDo()!==null ){
-            var lst= this.state.tps.doTransaction();
-            if(lst!==null ){
+        if(tPs.peekDo()!==null ){
+            var lst= tPs.doTransaction();
+            //if(lst!==null ){
                 this.setState({name:lst.name});
-                this.state.currentList.name=lst.name;
                 this.setState({owner:lst.owner});
+
+                var newLst=this.state.currentList;
+                newLst.name=lst.name;
+                newLst.owner=lst.owner;
+                newLst.items=lst.items;
+                this.setState({currentList:newLst});
+
+                /*this.state.currentList.name=lst.name;
+                
                 this.state.currentList.owner=lst.owner;
-                this.state.currentList.items=lst.items;
+                this.state.currentList.items=lst.items;*/
                 //this.props.todoList=lst;
+                this.setState({tps:tPs});
                 this.goToList();
                 //this.loadList(this.state.currentList);
-                console.log(this.props.tps);
-                return this.state.currentList;
-            }
+                //return this.state.currentList;
+            //}
         }
     }
   }
@@ -124,7 +141,7 @@ class App extends Component {
         //edit-------------------------------------
         let trans={
             currentList:this.state.currentList,
-            oldListName:oldListName,
+            oldListName:this.state.currentList.name,
             newListName:'Unknown'
         };
 
@@ -137,7 +154,7 @@ class App extends Component {
         //edit-------------------------------------
         let trans={
             currentList:this.state.currentList,
-            oldListName:oldListName,
+            oldListName:this.state.currentList.name,
             newListName:e.target.value
         };
 
@@ -146,12 +163,10 @@ class App extends Component {
 
         //this.props.todoList.name = e.target.value;
     }
-
-    console.log(this.props.tps);
 }
 
 onChangeOwner = (e) => {
-  this.setState({ owner: e.target.owner });
+  this.setState({ owner: e.target.value });
   var oldOwnerName=this.state.currentList.owner;
   if (e.target.value.trim() === '') {
 

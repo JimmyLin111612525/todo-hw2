@@ -6,12 +6,14 @@ export class ListTrash extends Component {
     }
 
     modalAnim = () => {
+        document.removeEventListener('keydown',this.props.undo_redo);
         this.setState({ modal: 'modal is_visible' });
         console.log(this.state);
         //this.props.deleteList();
     }
 
     cancelDelete = () => {
+        document.addEventListener('keydown',this.props.undo_redo);
         this.setState({ modal: 'modal' });
     }
 
