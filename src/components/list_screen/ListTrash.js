@@ -6,14 +6,14 @@ export class ListTrash extends Component {
     }
 
     modalAnim = () => {
-        document.removeEventListener('keydown',this.props.undo_redo);
+        document.removeEventListener('keydown', this.props.undo_redo);
         this.setState({ modal: 'modal is_visible' });
         console.log(this.state);
         //this.props.deleteList();
     }
 
     cancelDelete = () => {
-        document.addEventListener('keydown',this.props.undo_redo);
+        document.addEventListener('keydown', this.props.undo_redo);
         this.setState({ modal: 'modal' });
     }
 
@@ -25,7 +25,7 @@ export class ListTrash extends Component {
         return (
             <div>
                 <div id="list_trash" onClick={this.modalAnim}>&#128465;</div>
-                <div className={this.state.modal}>
+                <div className={this.state.modal} data-animation="rotateInOutDown">
                     <div className='modal_dialog'>
                         <p className='modal_header'>
                             Delete List?

@@ -215,7 +215,6 @@ font-size: 16pt;
 .modal.is_visible {
   visibility: visible;
   opacity: 1;
-  background:rgba(147, 147, 147, 0.72);
 }
 
 .modal_dialog {

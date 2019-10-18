@@ -13,7 +13,7 @@ export class ListItemsTable extends Component {
             due_date: '',
             assigned_to: '',
             completed: false,
-            new:true
+            new: true
         }
         this.props.todoList.items.push(item);
         /*for(var i=0;i<this.props.todoList.items.length;i++){
@@ -24,8 +24,8 @@ export class ListItemsTable extends Component {
     sortTask = () => {
         this.setState({ clicked: !this.state.clicked });
         console.log(this.state.clicked);
-        let newList=JSON.parse(JSON.stringify(this.props.todoList.items));
-        let oldList=JSON.stringify(this.props.todoList.items);
+        let newList = JSON.parse(JSON.stringify(this.props.todoList.items));
+        let oldList = JSON.stringify(this.props.todoList.items);
         newList.sort(function (a, b) {
             if (a.description < b.description) {
                 return 1;
@@ -36,49 +36,32 @@ export class ListItemsTable extends Component {
                 return 0;
             }
         });
-        
-        /*this.props.todoList.items.sort(function (a, b) {
-            if (a.description < b.description) {
-                return 1;
-            }
-            if (a.description > b.description) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });*/
 
         if (!this.state.clicked) {
             newList.reverse();
         }
 
-        for(var i=0;i<newList.length;i++){
-            newList[i].key=i;
+        for (var i = 0; i < newList.length; i++) {
+            newList[i].key = i;
         }
 
-        var trans={
-            currentList:this.props.todoList,
-            oldItem:oldList,
-            newItem:newList,
+        var trans = {
+            currentList: this.props.todoList,
+            oldItem: oldList,
+            newItem: newList,
             //taskSort:true,
             //clicked:this.state.clicked,
-            sort:true
+            sort: true
         }
-         this.props.tps.addTransaction(trans);
-
-        //this.props.todoList.items=lst.items;
-
-        /*if (!this.state.clicked) {
-            this.props.todoList.items.reverse();
-        }*/
+        this.props.tps.addTransaction(trans);
 
         this.props.loadList(this.props.todoList);
     }
 
     sortDate = () => {
         this.setState({ clicked: !this.state.clicked });
-        let newList=JSON.parse(JSON.stringify(this.props.todoList.items));
-        let oldList=JSON.stringify(this.props.todoList.items);
+        let newList = JSON.parse(JSON.stringify(this.props.todoList.items));
+        let oldList = JSON.stringify(this.props.todoList.items);
         newList.sort(function (a, b) {
             if (a.due_date < b.due_date) {
                 return 1;
@@ -89,40 +72,24 @@ export class ListItemsTable extends Component {
                 return 0;
             }
         });
-        /*this.props.todoList.items.sort(function (a, b) {
-            if (a.due_date < b.due_date) {
-                return 1;
-            }
-            if (a.due_date > b.due_date) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-        if (!this.state.clicked) {
-            this.props.todoList.items.reverse();
-        }
 
-        for(var i=0;i<this.props.todoList.items.length;i++){
-            this.props.todoList.items[i].key=i;
-        }*/
         if (!this.state.clicked) {
             newList.reverse();
         }
 
-        for(var i=0;i<newList.length;i++){
-            newList[i].key=i;
+        for (var i = 0; i < newList.length; i++) {
+            newList[i].key = i;
         }
 
-        var trans={
-            currentList:this.props.todoList,
-            oldItem:oldList,
-            newItem:newList,
+        var trans = {
+            currentList: this.props.todoList,
+            oldItem: oldList,
+            newItem: newList,
             //dateSort:true,
             //clicked:this.state.clicked,
-            sort:true
+            sort: true
         }
-         this.props.tps.addTransaction(trans);
+        this.props.tps.addTransaction(trans);
 
         //this.props.todoList.items=lst.items;
 
@@ -135,8 +102,8 @@ export class ListItemsTable extends Component {
 
     sortComp = () => {
         this.setState({ clicked: !this.state.clicked });
-        let newList=JSON.parse(JSON.stringify(this.props.todoList.items));
-        let oldList=JSON.stringify(this.props.todoList.items);
+        let newList = JSON.parse(JSON.stringify(this.props.todoList.items));
+        let oldList = JSON.stringify(this.props.todoList.items);
         newList.sort(function (a, b) {
             if (a.completed === true && b.completed === false) {
                 return 1;
@@ -151,20 +118,20 @@ export class ListItemsTable extends Component {
             newList.reverse();
         }
 
-        for(var i=0;i<newList.length;i++){
-            newList[i].key=i;
+        for (var i = 0; i < newList.length; i++) {
+            newList[i].key = i;
         }
 
-        var trans={
-            currentList:this.props.todoList,
-            oldItem:oldList,
-            newItem:newList,
+        var trans = {
+            currentList: this.props.todoList,
+            oldItem: oldList,
+            newItem: newList,
             //dateSort:true,
             //clicked:this.state.clicked,
-            sort:true
+            sort: true
         }
-         this.props.tps.addTransaction(trans);
-        
+        this.props.tps.addTransaction(trans);
+
         this.props.loadList(this.props.todoList);
     }
 
@@ -185,7 +152,7 @@ export class ListItemsTable extends Component {
                             todoList={this.props.todoList}
                             loadList={this.props.loadList}
                             tps={this.props.tps}
-                            
+
                         />
                     ))
                 }
