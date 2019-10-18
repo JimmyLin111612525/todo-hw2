@@ -47,6 +47,30 @@ export class actual_Transaction extends jsTPS_Transaction{
             });
             return transaction.currentList;
         }
+        if(transaction.sort){
+            /*transaction.currentList.items.sort(function (a, b) {
+                if (a.description < b.description) {
+                    return 1;
+                }
+                if (a.description > b.description) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });*/
+
+            /*if (!transaction.clicked) {
+                transaction.currentList.items.reverse();
+            }*/
+            transaction.currentList.items=transaction.newItem;
+    
+            for(var i=0;i<transaction.currentList.items.length;i++){
+                transaction.currentList.items[i].key=i;
+            }
+
+            //return transaction.currentList;
+        }
+        
         if(transaction.new_ass){
             transaction.originalItem.description=transaction.new_desc;
             transaction.originalItem.assigned_to=transaction.new_ass;
@@ -108,6 +132,10 @@ export class actual_Transaction extends jsTPS_Transaction{
                 list.key = counter;
                 counter++;
             });
+            return transaction.currentList;
+        }
+        if(transaction.sort){
+            transaction.currentList.items=JSON.parse(transaction.oldItem);
             return transaction.currentList;
         }
         if(transaction.new_ass){

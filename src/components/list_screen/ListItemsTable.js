@@ -4,7 +4,7 @@ import ListItemCard from './ListItemCard'
 export class ListItemsTable extends Component {
     state = {
         todoList: this.props.todoList,
-        clickedTask: false
+        clicked: false
     }
     newListItem = () => {
         let item = {
@@ -24,7 +24,9 @@ export class ListItemsTable extends Component {
     sortTask = () => {
         this.setState({ clicked: !this.state.clicked });
         console.log(this.state.clicked);
-        this.props.todoList.items.sort(function (a, b) {
+        let newList=JSON.parse(JSON.stringify(this.props.todoList.items));
+        let oldList=JSON.stringify(this.props.todoList.items);
+        newList.sort(function (a, b) {
             if (a.description < b.description) {
                 return 1;
             }
@@ -34,20 +36,60 @@ export class ListItemsTable extends Component {
                 return 0;
             }
         });
+        
+        /*this.props.todoList.items.sort(function (a, b) {
+            if (a.description < b.description) {
+                return 1;
+            }
+            if (a.description > b.description) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });*/
+
         if (!this.state.clicked) {
-            this.props.todoList.items.reverse();
+            newList.reverse();
         }
 
-        for(var i=0;i<this.props.todoList.items.length;i++){
-            this.props.todoList.items[i].key=i;
+        for(var i=0;i<newList.length;i++){
+            newList[i].key=i;
         }
+
+        var trans={
+            currentList:this.props.todoList,
+            oldItem:oldList,
+            newItem:newList,
+            //taskSort:true,
+            //clicked:this.state.clicked,
+            sort:true
+        }
+         this.props.tps.addTransaction(trans);
+
+        //this.props.todoList.items=lst.items;
+
+        /*if (!this.state.clicked) {
+            this.props.todoList.items.reverse();
+        }*/
 
         this.props.loadList(this.props.todoList);
     }
 
     sortDate = () => {
         this.setState({ clicked: !this.state.clicked });
-        this.props.todoList.items.sort(function (a, b) {
+        let newList=JSON.parse(JSON.stringify(this.props.todoList.items));
+        let oldList=JSON.stringify(this.props.todoList.items);
+        newList.sort(function (a, b) {
+            if (a.due_date < b.due_date) {
+                return 1;
+            }
+            if (a.due_date > b.due_date) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        /*this.props.todoList.items.sort(function (a, b) {
             if (a.due_date < b.due_date) {
                 return 1;
             }
@@ -63,14 +105,39 @@ export class ListItemsTable extends Component {
 
         for(var i=0;i<this.props.todoList.items.length;i++){
             this.props.todoList.items[i].key=i;
+        }*/
+        if (!this.state.clicked) {
+            newList.reverse();
         }
+
+        for(var i=0;i<newList.length;i++){
+            newList[i].key=i;
+        }
+
+        var trans={
+            currentList:this.props.todoList,
+            oldItem:oldList,
+            newItem:newList,
+            //dateSort:true,
+            //clicked:this.state.clicked,
+            sort:true
+        }
+         this.props.tps.addTransaction(trans);
+
+        //this.props.todoList.items=lst.items;
+
+        /*if (!this.state.clicked) {
+            this.props.todoList.items.reverse();
+        }*/
 
         this.props.loadList(this.props.todoList);
     }
 
     sortComp = () => {
         this.setState({ clicked: !this.state.clicked });
-        this.props.todoList.items.sort(function (a, b) {
+        let newList=JSON.parse(JSON.stringify(this.props.todoList.items));
+        let oldList=JSON.stringify(this.props.todoList.items);
+        newList.sort(function (a, b) {
             if (a.completed === true && b.completed === false) {
                 return 1;
             }
@@ -81,12 +148,22 @@ export class ListItemsTable extends Component {
             }
         });
         if (!this.state.clicked) {
-            this.props.todoList.items.reverse();
+            newList.reverse();
         }
 
-        for(var i=0;i<this.props.todoList.items.length;i++){
-            this.props.todoList.items[i].key=i;
+        for(var i=0;i<newList.length;i++){
+            newList[i].key=i;
         }
+
+        var trans={
+            currentList:this.props.todoList,
+            oldItem:oldList,
+            newItem:newList,
+            //dateSort:true,
+            //clicked:this.state.clicked,
+            sort:true
+        }
+         this.props.tps.addTransaction(trans);
         
         this.props.loadList(this.props.todoList);
     }

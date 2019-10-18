@@ -92,6 +92,10 @@ class App extends Component {
                 newLst.name=lst.name;
                 newLst.owner=lst.owner;
                 newLst.items=lst.items;
+                for(var i=0;i<newLst.items.length;i++){
+                  newLst.items[i].key=i;
+                }
+                console.log(newLst.items);
                 this.setState({currentList:newLst});
 
                 /*this.state.currentList.name=lst.name;
@@ -100,7 +104,7 @@ class App extends Component {
                 this.state.currentList.items=lst.items;*/
                 //this.props.todoList=lst;
                 this.setState({tps:tPs});
-                this.goToList();
+                this.loadList(this.state.currentList);
                 //console.log(this.props.tps);
                 //return this.state.currentList;
             //}
@@ -115,7 +119,12 @@ class App extends Component {
                 var newLst=this.state.currentList;
                 newLst.name=lst.name;
                 newLst.owner=lst.owner;
-                newLst.items=lst.items;
+                //newLst.items=lst.items;
+
+                /*for(var i=0;i<newLst.items.length;i++){
+                  newLst.items[i].key=i;
+                }*/
+
                 this.setState({currentList:newLst});
 
                 /*this.state.currentList.name=lst.name;
