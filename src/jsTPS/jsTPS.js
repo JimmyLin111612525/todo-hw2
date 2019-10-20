@@ -74,6 +74,7 @@ export default class jsTPS {
             this.mostRecentTransaction--;
             this.performingUndo = false;
         }
+        console.log(this.transactions);
         return lst;
     }
 

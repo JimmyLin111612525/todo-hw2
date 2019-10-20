@@ -9,17 +9,32 @@ export class ListItemsTable extends Component {
     newListItem = () => {
         let item = {
             key: this.props.todoList.items.length,
-            description: '',
-            due_date: '',
-            assigned_to: '',
+            description: 'Unknown',
+            due_date: '0000-00-00',
+            assigned_to: 'Unknown',
             completed: false,
-            new: true
         }
-        this.props.todoList.items.push(item);
+
+        /***** */
+        /*var newItem=JSON.parse(JSON.stringify(this.props.todoList.items));
+        newItem.push(item);
+        let trans={
+            currentList:this.props.todoList,
+            oldItems:JSON.stringify(this.props.todoList.items),
+            newItems:newItem,
+            new:true
+        }*/
+
+        //this.props.tps.addTransaction(trans);
+
+        /*** */
+        
+        //this.props.todoList.items.push(item);
+
         /*for(var i=0;i<this.props.todoList.items.length;i++){
             this.props.todoList.items[i].key=i;
         }*/
-        this.props.editItem(item);
+        this.props.editItem(item,true);
     }
     sortTask = () => {
         this.setState({ clicked: !this.state.clicked });

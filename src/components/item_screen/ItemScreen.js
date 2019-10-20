@@ -6,11 +6,13 @@ export class ItemScreen extends Component {
         desc: this.props.todoItem.description,
         ass: this.props.todoItem.assigned_to,
         date: this.props.todoItem.due_date,
-        check: this.props.todoItem.completed
+        check: this.props.todoItem.completed,
+        new:null
     }
 
     onChangeDescription = (e) => {
         this.setState({ desc: e.target.value });
+        this.setState({new:false});
         /*if(e.target.value===''){
             this.props.todoItem.description='Unknown';
         }else{
@@ -20,6 +22,7 @@ export class ItemScreen extends Component {
 
     onChangeAssignment = (e) => {
         this.setState({ ass: e.target.value });
+        this.setState({new:false});
         /*if(e.target.value==''){
             this.props.todoItem.assigned_to='Unknown';
         }else{
@@ -29,18 +32,38 @@ export class ItemScreen extends Component {
 
     onChangeDate = (e) => {
         this.setState({ date: e.target.value });
+        this.setState({new:false});
         //this.props.todoItem.due_date=e.target.value;
     }
 
     onChangeComplete = (e) => {
         //console.log(e.target.checked);
         this.setState({ check: e.target.checked });
+        console.log(e.target.checked);
+        this.setState({new:false});
         //this.props.todoItem.completed=e.target.checked;
     }
 
     submitChanges = () => {
+        var newItemS=JSON.parse(JSON.stringify(this.props.todoList.items));
+        newItemS.push(this.props.todoItem);
 
-        var trans = {
+        let trans1={
+            currentList:this.props.todoList,
+            oldItems:JSON.stringify(this.props.todoList.items),
+            newItems:newItemS,
+            new:true
+        }
+
+        if(this.props.newOrNot===true){
+            console.log('new');
+            this.setState({new:true});
+            this.props.tps.addTransaction(trans1);
+        }
+
+        console.log(this.props.tps.transactions);
+
+        var trans2 = {
             currentList: this.props.todoList,
             originalItem: this.props.todoItem,
             old_desc: this.props.todoItem.description,
@@ -58,14 +81,26 @@ export class ItemScreen extends Component {
         this.state.date === '' ? this.props.todoItem.due_date = '0000-00-00' : this.props.todoItem.due_date = this.state.date;
         this.props.todoItem.completed = this.state.check;*/
 
-        this.state.desc === '' ? trans.new_desc = 'Unknown' : trans.new_desc = this.state.desc;
-        this.state.ass === '' ? trans.new_ass = 'Unknown' : trans.new_ass = this.state.ass;
-        this.state.date === '' ? trans.new_date = '0000-00-00' : trans.new_date = this.state.date;
+        this.state.desc === '' ? trans2.new_desc = 'Unknown' : trans2.new_desc = this.state.desc;
+        this.state.ass === '' ? trans2.new_ass = 'Unknown' : trans2.new_ass = this.state.ass;
+        this.state.date === '' ? trans2.new_date = '0000-00-00' : trans2.new_date = this.state.date;
 
-        if (!this.props.todoItem.new) {
-            var item = this.props.tps.addTransaction(trans);
+        if (this.props.newOrNot===false || this.state.new===false) {
+        //if(this.state.desc!=='Unknown' && this.state.ass!=='Unknown'&&this.state.date!=='0000-00-00'&&this.state.check!==false){
+            if((this.state.desc!==this.props.todoItem.description || this.state.ass!==this.props.todoItem.assigned_to || this.state.date!==this.props.todoItem.due_date || this.state.check!==this.props.todoItem.completed)){
+                console.log('different');
+                var item = this.props.tps.addTransaction(trans2);
+            }else{
+                console.log('same');
+            }
+            
             console.log(item);
-        } else {
+            //}
+        }   
+        if(this.state.desc==='Unknown' && this.state.ass==='Unknown'&&this.state.date==='0000-00-00'&&this.state.check===false){
+            console.log('NEW');
+        }
+        /*} else {
             console.log('new')
             this.props.todoItem.description = trans.new_desc;
             this.props.todoItem.assigned_to = trans.new_ass;
@@ -73,7 +108,7 @@ export class ItemScreen extends Component {
             this.props.todoItem.completed = trans.new_completed;
             this.props.todoItem.new = false;
             console.log(this.props.tps.transactions);
-        }
+        }*/
 
 
         //console.log(this.props.todoItem);
@@ -82,11 +117,12 @@ export class ItemScreen extends Component {
     }
 
     cancelChanges = () => {
-        if (this.props.todoItem.new) {
-            var item = this.props.tps.undoTransaction();
-            console.log(item);
-            this.props.todoList.items.splice(this.props.todoList.items.length - 1, 1);
-        }
+        //if (this.props.todoItem.new===true) {
+            /*var item = this.props.tps.undoTransaction();
+            console.log(item);*/
+            //this.props.tps.transactions
+           // this.props.todoList.items.splice(this.props.todoList.items.length - 1, 1);
+        //}
         this.props.goToList();
     }
 

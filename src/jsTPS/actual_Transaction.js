@@ -56,6 +56,15 @@ export class actual_Transaction extends jsTPS_Transaction {
 
         }
 
+        if(transaction.new===true){
+            transaction.currentList.items=transaction.newItems;
+            transaction.new=false;
+            for (var i = 0; i < transaction.currentList.items.length; i++) {
+                transaction.currentList.items[i].key = i;
+            }
+            return transaction.currentList;
+        }
+
         if (transaction.new_ass) {
             transaction.originalItem.description = transaction.new_desc;
             transaction.originalItem.assigned_to = transaction.new_ass;
@@ -123,12 +132,20 @@ export class actual_Transaction extends jsTPS_Transaction {
             transaction.currentList.items = JSON.parse(transaction.oldItem);
             return transaction.currentList;
         }
+        if(transaction.new===false){
+            transaction.currentList.items=JSON.parse(transaction.oldItems);
+            transaction.new=true;
+            for (var i = 0; i < transaction.currentList.items.length; i++) {
+                transaction.currentList.items[i].key = i;
+            }
+            return transaction.currentList;
+        }
         if (transaction.new_ass) {
             transaction.originalItem.description = transaction.old_desc;
             transaction.originalItem.assigned_to = transaction.old_ass;
             transaction.originalItem.due_date = transaction.old_date;
             transaction.originalItem.completed = transaction.old_completed;
-
+            transaction.currentList.items[transaction.originalItem.key]=transaction.originalItem;
             return transaction.currentList;
 
         } else {

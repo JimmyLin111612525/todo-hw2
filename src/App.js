@@ -20,7 +20,8 @@ class App extends Component {
     currentItem: null,
     tps: new jsTPS(),
     name: null,
-    owner: null
+    owner: null,
+    newOrNot:null,
   }
 
   goHome = () => {
@@ -73,10 +74,11 @@ class App extends Component {
     this.goHome();
   }
 
-  editItem = (item) => {
+  editItem = (item,newItem) => {
     //console.log(item);
     this.setState({ currentScreen: AppScreen.ITEM_SCREEN });
     this.setState({ currentItem: item });
+    this.setState({newOrNot:newItem});
   }
 
   undo_redo = (e) => {
@@ -226,6 +228,7 @@ class App extends Component {
           todoList={this.state.currentList}
           loadList={this.loadList}
           tps={this.state.tps}
+          newOrNot={this.state.newOrNot}
         />;
       default:
         return <div>ERROR</div>;

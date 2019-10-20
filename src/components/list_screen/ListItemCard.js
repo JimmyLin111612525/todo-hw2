@@ -29,14 +29,14 @@ export class ListItemCard extends Component {
         }
 
 
-        console.log(trans);
+        //console.log(trans);
         this.props.loadList(this.props.todoList);
 
     }
 
     downItem = (e) => {
         e.stopPropagation();
-        console.log(this.props.todoList.items.length);
+        //console.log(this.props.todoList.items.length);
         const oldKey = this.props.listItem.key;
         const newKey = this.props.listItem.key + 1;
         if (oldKey !== this.props.todoList.items.length - 1) {
@@ -83,11 +83,12 @@ export class ListItemCard extends Component {
 
     change = () => {
         document.removeEventListener('keydown', this.props.undo_redo)
-        this.props.editItem(this.props.listItem);
+        
+        this.props.editItem(this.props.listItem,false);
     }
 
     render() {
-        console.log(this.props);
+       // console.log(this.props);
         const item = this.props.listItem;
         this.setOpacityUp();
         this.setOpacityDown();
